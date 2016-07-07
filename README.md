@@ -6,7 +6,7 @@ Tiger.JsonTypes is a library that extends `Tiger.Types` for JSON support.
 
 ## Why You Want It
 
-The Newtonsoft.Json library has built-in support for may types, but not for `Option<TSome>`.  This library instructs Newtonsoft.Json how to treat `Option<TSome>` identically to `TSome?` (or `Nullable<TSome>`) in the case that `TSome: struct`, and identically to `TSome` in the case that `TSome: class`.  This allows a JSON document produced by an Option-aware library to be consumed by a non–Option-aware library, and <i lang="la">vice versa</i>.
+The Newtonsoft.Json library has built-in support for many types, but not for `Option<TSome>`.  This library instructs Newtonsoft.Json how to treat `Option<TSome>` identically to `TSome?` (or `Nullable<TSome>`) in the case that `TSome: struct`, and identically to `TSome` in the case that `TSome: class`.  This allows a JSON document produced by an Option-aware library to be consumed by a non–Option-aware library, and <i lang="la">vice versa</i>.
 
 ## How You Develop It
 
