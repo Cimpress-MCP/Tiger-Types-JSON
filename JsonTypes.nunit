@@ -1,0 +1,12 @@
+﻿<NUnitProject>
+  <Settings activeconfig="Release"
+            appbase="src/UnitTests/bin"/>
+  <Config name="Debug"
+          appbase="Debug">
+    <assembly path="Tiger.JsonTypes.UnitTests.dll"/>
+  </Config>
+  <Config name="Release"
+          appbase="Release">
+    <assembly path="Tiger.JsonTypes.UnitTests.dll"/>
+  </Config>
+</NUnitProject>
