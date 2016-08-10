@@ -61,6 +61,15 @@ namespace Tiger.JsonTypes.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot serialize a Bottom Either..
+        /// </summary>
+        internal static string EitherCannotBeBottom {
+            get {
+                return ResourceManager.GetString("EitherCannotBeBottom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The provided type is not compatible with Tiger.Types.Option`1[TSome]..
         /// </summary>
         internal static string IncompatibleType {
@@ -75,6 +84,15 @@ namespace Tiger.JsonTypes.Properties {
         internal static string IncompatibleValue {
             get {
                 return ResourceManager.GetString("IncompatibleValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to find Left value of Either..
+        /// </summary>
+        internal static string ThisIsABug {
+            get {
+                return ResourceManager.GetString("ThisIsABug", resourceCulture);
             }
         }
     }

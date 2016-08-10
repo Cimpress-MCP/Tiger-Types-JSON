@@ -8,11 +8,17 @@ using static System.Diagnostics.Contracts.Contract;
 namespace Tiger.JsonTypes
 {
     /// <summary>
-    /// Provides the capabilities to serialize and deserialize <see cref="Option{TSome}"/> to and from JSON.
+    /// Provides the capabilities to serialize <see cref="Either{TLeft,TRight}"/> to JSON.
     /// </summary>
-    public sealed class OptionJsonConverter
+    
+    public sealed class EitherJsonConverter
         : JsonConverter
     {
+        /// <summary>
+        /// Gets a value indicating whether this <see cref="JsonConverter" /> can read JSON.
+        /// </summary>
+        public override bool CanRead { get; } = false;
+
         /// <summary>Determines whether this instance can convert the specified object type.</summary>
         /// <param name="objectType">Type of the object.</param>
         /// <returns>
@@ -23,7 +29,7 @@ namespace Tiger.JsonTypes
         {
             return objectType != null &&
                    objectType.IsGenericType &&
-                   objectType.GetGenericTypeDefinition() == typeof(Option<>);
+                   objectType.GetGenericTypeDefinition() == typeof(Either<,>);
         }
 
         /// <summary>Writes the JSON representation of the object.</summary>
@@ -31,23 +37,34 @@ namespace Tiger.JsonTypes
         /// <param name="value">The value.</param>
         /// <param name="serializer">The calling serializer.</param>
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
+        /// <exception cref="JsonWriterException"><paramref name="value"/> could not be written.</exception>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             if (value == null) { throw new ArgumentNullException(nameof(value), Resources.IncompatibleValue); }
 
             var objectType = value.GetType();
             Assume(objectType.IsGenericType, Resources.IncompatibleValue);
-            Assume(objectType.GetGenericTypeDefinition() == typeof(Option<>), Resources.IncompatibleValue);
+            Assume(objectType.GetGenericTypeDefinition() == typeof(Either<,>), Resources.IncompatibleValue);
 
-            var dynamicValue = value as dynamic;
-            if (dynamicValue.IsNone)
+            dynamic dynamicValue = value;
+            if (!dynamicValue.IsLeft && !dynamicValue.IsRight)
             {
-                serializer.Serialize(writer, null);
+                throw new JsonWriterException(Resources.EitherCannotBeBottom);
+            }
+
+            var types = objectType.GetGenericArguments();
+            if (dynamicValue.IsRight)
+            {
+                serializer.Serialize(writer, dynamicValue.Value, types[1]);
                 return;
             }
 
-            var underlyingType = Option.GetUnderlyingType(objectType);
-            serializer.Serialize(writer, dynamicValue.Value, underlyingType);
+            var leftValueField = objectType.GetField("LeftValue", BindingFlags.Instance | BindingFlags.NonPublic);
+            if (leftValueField == null)
+            {
+                throw new JsonWriterException(Resources.ThisIsABug);
+            }
+            serializer.Serialize(writer, leftValueField.GetValue(value), types[0]);
         }
 
 
@@ -63,14 +80,7 @@ namespace Tiger.JsonTypes
             object existingValue,
             JsonSerializer serializer)
         {
-            var underlyingType = Option.GetUnderlyingType(objectType);
-            Assume(underlyingType != null, Resources.IncompatibleType);
-
-            return Option.From(reader.ValueType)
-                         .Bind<object>(_ => serializer.Deserialize(reader, underlyingType))
-                         .Map(v => Activator.CreateInstance(objectType,
-                            BindingFlags.NonPublic | BindingFlags.Instance, null, new[] { v }, null))
-                         .GetValueOrDefault(() => Activator.CreateInstance(objectType));
+            throw new NotImplementedException("CanRead is false.");
         }
     }
 }

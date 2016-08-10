@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="EitherCannotBeBottom" xml:space="preserve">
+    <value>Cannot serialize a Bottom Either.</value>
+    <comment>Explains why attempted serialization of an Either in the Bottom state failed.</comment>
+  </data>
   <data name="IncompatibleType" xml:space="preserve">
     <value>The provided type is not compatible with Tiger.Types.Option`1[TSome].</value>
     <comment>Explains that a provided type was not correct.</comment>
@@ -124,5 +128,9 @@
   <data name="IncompatibleValue" xml:space="preserve">
     <value>The provided value is not compatible with Tiger.Types.Option`1[TSome].</value>
     <comment>Explains that a provided value was not of the correct type.</comment>
+  </data>
+  <data name="ThisIsABug" xml:space="preserve">
+    <value>Unable to find Left value of Either.</value>
+    <comment>Why did you change the name of the LeftValue field?</comment>
   </data>
 </root>
