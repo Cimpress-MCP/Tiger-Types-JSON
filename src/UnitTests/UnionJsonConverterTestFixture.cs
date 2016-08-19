@@ -6,9 +6,9 @@ using Tiger.Types;
 
 namespace Tiger.JsonTypes.UnitTests
 {
-    /// <summary>Tests related to <see cref="EitherJsonConverter"/>.</summary>
-    [TestFixture(TestOf = typeof(EitherJsonConverter))]
-    public sealed class EitherJsonConverterTestFixture
+    /// <summary>Tests related to <see cref="UnionJsonConverter"/>.</summary>
+    [TestFixture(TestOf = typeof(UnionJsonConverter))]
+    public sealed class UnionJsonConverterTestFixture
     {
         const string sentinel = "sentinel";
         const string none = @"null";
@@ -17,27 +17,27 @@ namespace Tiger.JsonTypes.UnitTests
 
         static readonly TestCaseData[] SerializeSource =
         {
-            new TestCaseData(Either.Left<string, int>(sentinel)).Returns(someString),
-            new TestCaseData(Either.Right<string, int>(42)).Returns(someInt),
-            new TestCaseData(Either.Left<int, string>(42)).Returns(someInt),
-            new TestCaseData(Either.Right<int, string>(sentinel)).Returns(someString)
+            new TestCaseData(Union.From<string, int>(sentinel)).Returns(someString),
+            new TestCaseData(Union.From<string, int>(42)).Returns(someInt),
+            new TestCaseData(Union.From<int, string>(42)).Returns(someInt),
+            new TestCaseData(Union.From<int, string>(sentinel)).Returns(someString)
         };
 
         [TestCaseSource(nameof(SerializeSource))]
         public string Serialize(object value)
         {
             // arrange, act
-            return JsonConvert.SerializeObject(value, new EitherJsonConverter());
+            return JsonConvert.SerializeObject(value, new UnionJsonConverter());
         }
 
-        [TestCase(typeof(Either<int, string>), ExpectedResult = true)]
-        [TestCase(typeof(Either<string, int>), ExpectedResult = true)]
+        [TestCase(typeof(Union<int, string>), ExpectedResult = true)]
+        [TestCase(typeof(Union<string, int>), ExpectedResult = true)]
         [TestCase(typeof(int), ExpectedResult = false)]
         [TestCase(typeof(string), ExpectedResult = false)]
         public bool CanConvert(Type serializationType)
         {
             // arrange
-            var converter = new EitherJsonConverter();
+            var converter = new UnionJsonConverter();
 
             // act
             return converter.CanConvert(serializationType);

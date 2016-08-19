@@ -46,6 +46,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="UnionJsonConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
@@ -58,8 +59,8 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="Tiger.Types, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Tiger.Types.2.0.0\lib\net452\Tiger.Types.dll</HintPath>
+    <Reference Include="Tiger.Types, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Tiger.Types.2.1.0\lib\net452\Tiger.Types.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

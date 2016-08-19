@@ -43,6 +43,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="UnionJsonConverterTestFixture.cs" />
     <Compile Include="EitherJsonConverterTestFixture.cs" />
     <Compile Include="OptionJsonConverterTestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -60,8 +61,8 @@
       <HintPath>..\..\packages\NUnit.3.4.1\lib\net45\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Tiger.Types, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Tiger.Types.2.0.0\lib\net452\Tiger.Types.dll</HintPath>
+    <Reference Include="Tiger.Types, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Tiger.Types.2.1.0\lib\net452\Tiger.Types.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

@@ -11,7 +11,7 @@
     <projectUrl>https://mcpstash.cimpress.net/projects/MIPI/repos/json-types</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes><![CDATA[The Either type is now serializable.]]></releaseNotes>
+    <releaseNotes><![CDATA[The Union type is now serializable.]]></releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>option either task functional</tags>
   </metadata>
