@@ -1,3 +1,8 @@
+### What's new in 2.0.0 (Released 2016-11-14)
+
+* Thanks to the magic of the .NET Standard, Tiger libraries are available to a wider set of platforms than ever before. The project now targets .NET Standard 1.0.
+* The library has been renamed to reflect the growing nature of Tiger.
+
 ### What's new in 1.3.0 (Released 2016-08-19)
 
 * The Union type is now serializable.
