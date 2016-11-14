@@ -1,5 +1,5 @@
 {
-  "version": "2.0.0-*",
+  "version": "2.0.1-*",
   "name": "Tiger.Types.Json",
   "title": "Tiger JSON Types",
   "description": "JSON serialization capabilites for Tiger Types.",
@@ -37,7 +37,7 @@
       "type": "build",
       "version": "1.0.0"
     },
-    "Tiger.Types": "3.0.0"
+    "Tiger.Types": "3.0.1"
   },
 
   "frameworks": {
