@@ -37,7 +37,7 @@
       "type": "build",
       "version": "1.0.0"
     },
-    "Tiger.Types": "3.0.1"
+    "Tiger.Types": "3.1.0"
   },
 
   "frameworks": {
@@ -53,10 +53,10 @@
     "owners": [ "cosborn@cimpress.com" ],
     "repository": {
       "type": "git",
-      "url": "https://mcpstash.cimpress.net/projects/MIPI/repos/json-types"
+      "url": "https://mcpstash.cimpress.net/projects/TIGER/repos/types-json"
     },
     "requireLicenseAcceptance": false,
     "tags": [ "option", "maybe", "either", "json", "functional" ],
-    "iconUrl": "https://mcpstash.cimpress.net/projects/MIPI/repos/json-types/browse/tiger_team_logo_dark.png?raw"
+    "iconUrl": "https://mcpstash.cimpress.net/projects/TIGER/repos/types-json/browse/tiger_logo.png?raw"
   }
 }
