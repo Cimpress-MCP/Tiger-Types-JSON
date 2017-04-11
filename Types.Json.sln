@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26114.2
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiger.Types.Json", "Types.Json\Tiger.Types.Json.csproj", "{91243CB5-CCC1-42FD-BB20-817ACD3B3833}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiger.Types.Json", "src\Tiger.Types.Json.csproj", "{91243CB5-CCC1-42FD-BB20-817ACD3B3833}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "test\Test.csproj", "{A2798D50-0F67-4EBA-8512-4D8B88366F69}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "unit\Test.csproj", "{A2798D50-0F67-4EBA-8512-4D8B88366F69}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

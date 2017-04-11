@@ -4,6 +4,7 @@ using System.Reflection;
 using JetBrains.Annotations;
 using Newtonsoft.Json;
 using static System.Diagnostics.Contracts.Contract;
+using static Tiger.Types.Json.Resources;
 
 namespace Tiger.Types.Json
 {
@@ -14,12 +15,10 @@ namespace Tiger.Types.Json
         : JsonConverter
     {
         /// <inheritdoc/>
-        public override bool CanConvert([CanBeNull] Type objectType)
-        {
-            return objectType != null &&
-                   objectType.IsConstructedGenericType &&
-                   objectType.GetGenericTypeDefinition() == typeof(Option<>);
-        }
+        public override bool CanConvert([CanBeNull] Type objectType) =>
+            objectType != null &&
+            objectType.IsConstructedGenericType &&
+            objectType.GetGenericTypeDefinition() == typeof(Option<>);
 
         /// <inheritdoc/>
         public override void WriteJson(
@@ -28,8 +27,8 @@ namespace Tiger.Types.Json
             [NotNull] JsonSerializer serializer)
         {
             var objectType = value.GetType();
-            Assume(objectType.IsConstructedGenericType, Resources.IncompatibleValue);
-            Assume(objectType.GetGenericTypeDefinition() == typeof(Option<>), Resources.IncompatibleValue);
+            Assume(objectType.IsConstructedGenericType, IncompatibleValue);
+            Assume(objectType.GetGenericTypeDefinition() == typeof(Option<>), IncompatibleValue);
 
             var typeInfo = objectType.GetTypeInfo();
 
@@ -60,13 +59,13 @@ namespace Tiger.Types.Json
             [NotNull] JsonSerializer serializer)
         {
             var underlyingType = Option.GetUnderlyingType(objectType);
-            Assume(underlyingType != null, Resources.IncompatibleType);
+            Assume(underlyingType != null, IncompatibleType);
 
             var typeInfo = objectType.GetTypeInfo();
             var ctor = typeInfo.DeclaredConstructors.Single(c => c.GetParameters().Length == 1);
 
             return Option.From(reader.ValueType)
-                         .Bind<object>(_ => serializer.Deserialize(reader, underlyingType))
+                         .Bind(_ => Option.From(serializer.Deserialize(reader, underlyingType)))
                          .Map(v => ctor.Invoke(new[] { v }))
                          .GetValueOrDefault(() => Activator.CreateInstance(objectType));
         }

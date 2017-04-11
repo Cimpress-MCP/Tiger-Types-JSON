@@ -7,7 +7,7 @@ using Xunit;
 namespace Tiger.Types.Json.UnitTests
 {
     /// <summary>Tests related to <see cref="OptionTypeConverter"/>.</summary>
-    public sealed class OptionJsonConverterTestFixture
+    public sealed class OptionJsonConverterTests
     {
         const string sentinel = "sentinel";
         const string none = @"null";
@@ -55,7 +55,7 @@ namespace Tiger.Types.Json.UnitTests
 
             // act
             var actual = JsonConvert.SerializeObject(value, sut);
-            
+
             // assert
             Assert.Equal(expected, actual);
         }

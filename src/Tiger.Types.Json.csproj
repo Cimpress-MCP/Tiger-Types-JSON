@@ -5,30 +5,41 @@
     <Copyright>©Cimpress 2016</Copyright>
     <AssemblyTitle>Tiger JSON Types</AssemblyTitle>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <VersionPrefix>2.0.1</VersionPrefix>
+    <VersionPrefix>2.0.2</VersionPrefix>
     <Authors>cosborn@cimpress.com</Authors>
     <TargetFramework>netstandard1.0</TargetFramework>
     <DefineConstants>$(DefineConstants);CODE_ANALYSIS</DefineConstants>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DebugType>portable</DebugType>
+    <PreserveCompilationContext>false</PreserveCompilationContext>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <CodeAnalysisRuleSet>../Tiger.ruleset</CodeAnalysisRuleSet>
     <AssemblyName>Tiger.Types.Json</AssemblyName>
     <PackageId>Tiger.Types.Json</PackageId>
     <PackageTags>option;maybe;either;json;functional</PackageTags>
-    <PackageReleaseNotes>* Thanks to the magic of the .NET Standard, Tiger libraries are available to a wider set of platforms than ever before. The project now targets .NET Standard 1.0.
-* The library has been renamed to reflect the growing nature of Tiger.</PackageReleaseNotes>
+    <PackageReleaseNotes>⁃ Performance of some deserialization operations has been improved.</PackageReleaseNotes>
     <PackageProjectUrl>https://mcpstash.cimpress.net/projects/TIGER</PackageProjectUrl>
     <PackageIconUrl>https://mcpstash.cimpress.net/projects/TIGER/repos/types-json/browse/tiger_logo.png?raw</PackageIconUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://mcpstash.cimpress.net/projects/TIGER/repos/types-json</RepositoryUrl>
-    <NetStandardImplicitPackageVersion>1.6.0</NetStandardImplicitPackageVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Features>IOperation</Features>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Tiger.Types" Version="3.1.0"/>
-    <PackageReference Include="Newtonsoft.Json" Version="9.0.1"/>
+    <AdditionalFiles Include="../stylecop.json" />
+  </ItemGroup>
 
-    <!--<PackageReference Include="StyleCop.Analyzers" Version="1.0.0">
+  <ItemGroup>
+    <PackageReference Include="Tiger.Types" Version="4.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
+
+    <!--<PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta001">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="System.Runtime.Analyzers" Version="1.2.0-beta2">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>-->
   </ItemGroup>

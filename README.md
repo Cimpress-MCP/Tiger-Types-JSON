@@ -8,7 +8,7 @@ Tiger.Types.JSON is a library that allows some of the Tiger types to be mapped t
 
 Tiger types are unfamiliar to the JSON.NET serialization library, and due to the way that they represent values, require a little help to serialize or deserialize properly. This is similar to serializing a type of `Nullable<T>` (also written as `T?`). One could imagine an implementation of `Option<int>` called `Count` that serializes as a property of another object like this:
 
-```
+```json
 {
   "count": {
     "value": 42,
@@ -21,7 +21,7 @@ Tiger types are unfamiliar to the JSON.NET serialization library, and due to the
 
 Because all types in JSON are effectively nullable or optional, a superior serialization is this:
 
-```
+```json
 {
   "count": 42
 }
@@ -33,11 +33,21 @@ The supported operations for types are currently these:
 
 - `Option`: Serialize, deserialize
 - `Either`: Serialize
-- `Union`: Serialize 
+- `Union`: Serialize
 
 ## How You Develop It
 
-This project is using the standard [`dotnet`](https://dot.net) build tool.
+This project is using the standard [`dotnet`](https://dot.net) build tool. A brief primer:
+
+- Restore NuGet dependencies: `dotnet restore`
+- Build the entire solution: `dotnet build`
+- Run all unit tests: `dotnet test`
+- Pack for publishing: `dotnet pack -o "$(pwd)/artifacts"`
+
+The parameter `--configuration` (shortname `-c`) can be supplied to the `build`, `test`, and `pack` steps with the following meaningful values:
+
+- “Debug” (the default)
+- “Release”
 
 This repository is attempting to use the [GitFlow](http://jeffkreeftmeijer.com/2010/why-arent-you-using-git-flow/) branching methodology. Results may be mixed, please be aware.
 

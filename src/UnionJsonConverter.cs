@@ -2,6 +2,7 @@
 using JetBrains.Annotations;
 using Newtonsoft.Json;
 using static System.Diagnostics.Contracts.Contract;
+using static Tiger.Types.Json.Resources;
 
 namespace Tiger.Types.Json
 {
@@ -12,15 +13,13 @@ namespace Tiger.Types.Json
         : JsonConverter
     {
         /// <inheritdoc/>
-        public override bool CanRead { get; } = false;
+        public override bool CanRead => false;
 
         /// <inheritdoc/>
-        public override bool CanConvert([CanBeNull] Type objectType)
-        {
-            return objectType != null &&
-                   objectType.IsConstructedGenericType &&
-                   objectType.GetGenericTypeDefinition() == typeof(Union<,>); // todo(cosborn) or 3 or 4
-        }
+        public override bool CanConvert([CanBeNull] Type objectType) =>
+            objectType != null &&
+            objectType.IsConstructedGenericType &&
+            objectType.GetGenericTypeDefinition() == typeof(Union<,>);
 
         /// <inheritdoc/>
         public override void WriteJson(
@@ -36,8 +35,8 @@ namespace Tiger.Types.Json
 
             // todo(cosborn) or 3 or 4
             var objectType = value.GetType();
-            Assume(objectType.IsConstructedGenericType, Resources.IncompatibleValue);
-            Assume(objectType.GetGenericTypeDefinition() == typeof(Union<,>), Resources.IncompatibleValue);
+            Assume(objectType.IsConstructedGenericType, IncompatibleValue);
+            Assume(objectType.GetGenericTypeDefinition() == typeof(Union<,>), IncompatibleValue);
 
             var types = objectType.GenericTypeArguments;
             dynamic dynamicValue = value;
@@ -73,9 +72,6 @@ namespace Tiger.Types.Json
             JsonReader reader,
             Type objectType,
             object existingValue,
-            JsonSerializer serializer)
-        {
-            throw new NotSupportedException("CanRead is false.");
-        }
+            JsonSerializer serializer) => throw new NotSupportedException("CanRead is false.");
     }
 }

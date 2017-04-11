@@ -3,6 +3,7 @@ using System.Reflection;
 using JetBrains.Annotations;
 using Newtonsoft.Json;
 using static System.Diagnostics.Contracts.Contract;
+using static Tiger.Types.Json.Resources;
 
 namespace Tiger.Types.Json
 {
@@ -13,15 +14,13 @@ namespace Tiger.Types.Json
         : JsonConverter
     {
         /// <inheritdoc/>
-        public override bool CanRead { get; } = false;
+        public override bool CanRead => false;
 
         /// <inheritdoc/>
-        public override bool CanConvert([CanBeNull] Type objectType)
-        {
-            return objectType != null &&
-                   objectType.IsConstructedGenericType &&
-                   objectType.GetGenericTypeDefinition() == typeof(Either<,>);
-        }
+        public override bool CanConvert([CanBeNull] Type objectType) =>
+            objectType != null &&
+            objectType.IsConstructedGenericType &&
+            objectType.GetGenericTypeDefinition() == typeof(Either<,>);
 
         /// <inheritdoc/>
         /// <exception cref="JsonWriterException"><paramref name="value"/> could not be written.</exception>
@@ -31,13 +30,13 @@ namespace Tiger.Types.Json
             [NotNull] JsonSerializer serializer)
         {
             var objectType = value.GetType();
-            Assume(objectType.IsConstructedGenericType, Resources.IncompatibleValue);
-            Assume(objectType.GetGenericTypeDefinition() == typeof(Either<,>), Resources.IncompatibleValue);
+            Assume(objectType.IsConstructedGenericType, IncompatibleValue);
+            Assume(objectType.GetGenericTypeDefinition() == typeof(Either<,>), IncompatibleValue);
 
             dynamic dynamicValue = value;
             if (!dynamicValue.IsLeft && !dynamicValue.IsRight)
             {
-                throw new JsonWriterException(Resources.EitherCannotBeBottom);
+                throw new JsonWriterException(EitherCannotBeBottom);
             }
 
             var types = objectType.GenericTypeArguments; // note(cosborn) [TLeft, TRight]
@@ -48,13 +47,10 @@ namespace Tiger.Types.Json
             }
 
             var typeInfo = objectType.GetTypeInfo();
-            var leftValueProperty = typeInfo.GetDeclaredProperty("LeftValue");
-            if (leftValueProperty == null)
-            {
-                throw new JsonWriterException(Resources.ThisIsABug);
-            }
+            var leftValueField = typeInfo.GetDeclaredField("_leftValue") ??
+                throw new JsonWriterException(ThisIsABug);
 
-            serializer.Serialize(writer, leftValueProperty.GetValue(value), types[0]);
+            serializer.Serialize(writer, leftValueField.GetValue(value), types[0]);
         }
 
         /// <inheritdoc/>
@@ -63,9 +59,6 @@ namespace Tiger.Types.Json
             JsonReader reader,
             Type objectType,
             object existingValue,
-            JsonSerializer serializer)
-        {
-            throw new NotSupportedException("CanRead is false.");
-        }
+            JsonSerializer serializer) => throw new NotSupportedException("CanRead is false.");
     }
 }
