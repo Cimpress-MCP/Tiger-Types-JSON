@@ -1,6 +1,4 @@
-﻿// ReSharper disable All
-
-using System;
+﻿using System;
 using Newtonsoft.Json;
 using Xunit;
 
@@ -9,10 +7,10 @@ namespace Tiger.Types.Json.UnitTests
     /// <summary>Tests related to <see cref="OptionTypeConverter"/>.</summary>
     public sealed class OptionJsonConverterTests
     {
-        const string sentinel = "sentinel";
-        const string none = @"null";
-        const string someInt = @"42";
-        const string someString = @"""" + sentinel + @"""";
+        public const string sentinel = "sentinel";
+        public const string none = "null";
+        public const string someInt = "42";
+        public const string someString = @"""" + sentinel + @"""";
 
         public static readonly TheoryData<string, Type, object> DeserializeSource =
             new TheoryData<string, Type, object>
@@ -25,17 +23,8 @@ namespace Tiger.Types.Json.UnitTests
 
         [Theory(DisplayName = "Option values deserialize correctly.")]
         [MemberData(nameof(DeserializeSource))]
-        public void Deserialize(string json, Type serializationType, object expected)
-        {
-            // arrange
-            var sut = new OptionJsonConverter();
-
-            // act
-            var actual = JsonConvert.DeserializeObject(json, serializationType, sut);
-
-            // assert
-            Assert.Equal(expected, actual);
-        }
+        public void Deserialize(string json, Type serializationType, object expected) =>
+            Assert.Equal(expected, JsonConvert.DeserializeObject(json, serializationType, new OptionJsonConverter()));
 
         public static readonly TheoryData<object, string> SerializeSource =
             new TheoryData<object, string>
@@ -48,33 +37,15 @@ namespace Tiger.Types.Json.UnitTests
 
         [Theory(DisplayName = "Option values serialize correctly.")]
         [MemberData(nameof(SerializeSource))]
-        public void Serialize(object value, string expected)
-        {
-            // arrange
-            var sut = new OptionJsonConverter();
-
-            // act
-            var actual = JsonConvert.SerializeObject(value, sut);
-
-            // assert
-            Assert.Equal(expected, actual);
-        }
+        public void Serialize(object value, string expected) =>
+            Assert.Equal(expected, JsonConvert.SerializeObject(value, new OptionJsonConverter()));
 
         [Theory(DisplayName = "Option JSON Converters advertise their conversions correctly.")]
         [InlineData(typeof(Option<int>), true)]
         [InlineData(typeof(Option<string>), true)]
         [InlineData(typeof(int), false)]
         [InlineData(typeof(string), false)]
-        public void CanConvert(Type serializationType, bool expected)
-        {
-            // arrange
-            var sut = new OptionJsonConverter();
-
-            // act
-            var actual = sut.CanConvert(serializationType);
-
-            // act
-            Assert.Equal(expected, actual);
-        }
+        public void CanConvert(Type serializationType, bool expected) =>
+            Assert.Equal(expected, new OptionJsonConverter().CanConvert(serializationType));
     }
 }
