@@ -1,3 +1,7 @@
+### What's new in 5.0.0 (Released 2018-05-08)
+
+* The project has been brought in line with the 5.0 release of Tiger.Types.
+
 ### What's new in 2.0.2 (Released 2017-04-10)
 
 * Performance of some deserialization operations has been improved.

@@ -1,21 +1,32 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
     <DebugType>portable</DebugType>
     <AssemblyName>Test</AssemblyName>
-    <PackageId>Tiger.Types.Json.UnitTest</PackageId>
+    <RootNamespace>Tiger.Types.Json.UnitTest</RootNamespace>
     <IsPackable>false</IsPackable>
+    <CodeAnalysisRuleSet>../Tiger.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <Features>IOperation</Features>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  
   <ItemGroup>
-    <ProjectReference Include="..\src\Tiger.Types.Json.csproj"/>
+    <ProjectReference Include="..\src\Tiger.Types.Json.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0"/>
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0"/>
-    <PackageReference Include="xunit" Version="2.2.0"/>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
+    <PackageReference Include="xunit" Version="2.3.1" />
+
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.CodeQuality.Analyzers" Version="2.6.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.NetCore.Analyzers" Version="2.6.0" PrivateAssets="All" />
+    <PackageReference Include="Text.Analyzers" Version="2.6.0" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
