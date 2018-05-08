@@ -19,9 +19,9 @@
     <PackageTags>option;maybe;either;json;functional</PackageTags>
     <PackageReleaseNotes><![CDATA[⁃ The project has been brought in line with the 5.0 release of Tiger.Types.]]></PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/Cimpress-MCP</PackageProjectUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/Cimpress-MCP/Tiger-Types-Json/master/tiger_logo.png</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/Cimpress-MCP/Tiger-Types-JSON/master/tiger_logo.png</PackageIconUrl>
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/Cimpress-MCP/Tiger-Types-Json.git</RepositoryUrl>
+    <RepositoryUrl>https://github.com/Cimpress-MCP/Tiger-Types-JSON.git</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -34,7 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Tiger.Types" Version="5.0.0-preview1" />
+    <PackageReference Include="Tiger.Types" Version="5.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
 
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.0" PrivateAssets="All" /> 

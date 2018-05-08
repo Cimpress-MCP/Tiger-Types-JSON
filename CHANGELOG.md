@@ -1,4 +1,4 @@
-### What's new in 5.0.0 (Released ????-??-??)
+### What's new in 5.0.0 (Released 2018-05-08)
 
 * The project has been brought in line with the 5.0 release of Tiger.Types.
 
